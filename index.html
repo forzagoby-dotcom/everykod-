@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryKod+ | Premium Otomasyon Suite</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --primary: #6366f1; /* İndigo */
+            --secondary: #a855f7; /* Mor */
+            --accent: #ec4899; /* Pembe */
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- GRADIENT ARKA PLAN EFEKTLERİ --- */
+        .glow-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 600px; height: 600px; background: var(--primary); }
+        .blob-2 { bottom: -10%; right: -10%; width: 500px; height: 500px; background: var(--secondary); animation-delay: -5s; }
+
+        @keyframes float { 0% { transform: translate(0,0); } 100% { transform: translate(30px, 50px); } }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        .logo span { background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: white; }
+
+        /* --- HERO SECTION --- */
+        header {
+            padding: 160px 5% 80px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .btn-primary {
+            padding: 15px 40px;
+            background: white;
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+
+        /* --- SCREENSHOT ALANI --- */
+        .screenshot-wrapper {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .browser-mockup {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* --- ÖZELLİKLER --- */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+        .section-title span { color: var(--accent); }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            padding: 50px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .feature-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        
+        .icon-box {
+            width: 50px; height: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* --- NASIL ÇALIŞIR --- */
+        .steps-section {
+            padding: 80px 5%;
+            background: rgba(15, 23, 42, 0.5);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            position: relative;
+            background: transparent;
+            padding: 20px;
+        }
+
+        .step-card:not(:last-child)::after {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -25px;
+            top: 40%;
+            font-size: 24px;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+        @media (max-width: 900px) { .step-card:not(:last-child)::after { display: none; } }
+
+        .step-number {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .step-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: white; }
+        .step-desc { font-size: 15px; color: var(--text-muted); }
+
+        /* --- FİYATLANDIRMA --- */
+        .pricing-section {
+            padding: 100px 5%;
+            background: linear-gradient(to bottom, var(--bg-dark), #0b1120);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .price-card.popular {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.15);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .price { font-size: 48px; font-weight: 900; margin: 20px 0; color: white; }
+        .price span { font-size: 16px; color: var(--text-muted); font-weight: 400; }
+        .plan-name { font-size: 20px; font-weight: 600; color: var(--text-muted); }
+
+        .features-list { list-style: none; margin: 30px 0; text-align: left; }
+        .features-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: #cbd5e1; }
+        .features-list i { color: var(--success, #10b981); }
+
+        .btn-price {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            transition: 0.3s;
+        }
+        .price-card.popular .btn-price { background: var(--accent); }
+        .btn-price:hover { background: white; color: black; }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        /* EmirY Link Stili */
+        .developer-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .developer-link:hover { color: var(--primary); text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">Every<span>Kod+</span></div>
+        <div class="nav-links">
+            <a href="#ozellikler">Özellikler</a>
+            <a href="#nasil">Nasıl Çalışır?</a>
+            <a href="#fiyat">Paketler</a>
+        </div>
+        </nav>
+
+    <header>
+        <h1>Dijital Dünyanızı <br> Tek Merkezden Yönetin</h1>
+        <p class="hero-desc">
+            EveryKod+ ile tarayıcı otomasyonu, çoklu hesap yönetimi ve güvenli işlemler artık çok kolay. 
+            Tek bir panelden yüzlerce işlemi saniyeler içinde gerçekleştirin.
+        </p>
+        <div class="cta-buttons">
+            <a href="EveryKod_Kurulum.exe" class="btn-primary" download>
+                <i class="fab fa-windows"></i> Hemen İndir (Windows)
+            </a>
+        </div>
+
+        <div class="screenshot-wrapper">
+            <img src="ekrangoruntusu.png" alt="EveryKod+ Arayüzü" class="browser-mockup">
+        </div>
+    </header>
+
+    <section id="ozellikler" class="features">
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+            <h3>Çoklu Panel</h3>
+            <p>İstediğiniz kadar sekme açın, her birini ayrı proxy ve user-agent ile yönetin.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-robot"></i></div>
+            <h3>Akıllı Otomasyon</h3>
+            <p>Tek bir kod ile tüm açık sekmelere aynı anda komut gönderin, hız kazanın.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+            <h3>Tam Güvenlik</h3>
+            <p>ASAR şifreleme ve HWID lisans koruması ile verileriniz her zaman güvende.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-bolt"></i></div>
+            <h3>Hızlı Kurulum</h3>
+            <p>Profesyonel kurulum sihirbazı ile 1 dakikada kullanıma hazır hale gelir.</p>
+        </div>
+    </section>
+
+    <section id="nasil" class="steps-section">
+        <h2 class="section-title">3 Adımda <span>Başlayın</span></h2>
+        <div class="steps-container">
+            
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">İndir & Kur</h3>
+                <p class="step-desc">Windows uyumlu kurulum dosyasını indirin ve kurulum sihirbazı ile saniyeler içinde yükleyin.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Lisansını Gir</h3>
+                <p class="step-desc">Telegram üzerinden satın aldığınız lisans anahtarını girerek EveryKod+ dünyasına giriş yapın.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Yönetmeye Başla</h3>
+                <p class="step-desc">Panellerinizi oluşturun, sekmelerinizi açın ve toplu işlem gücünün keyfini çıkarın.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="fiyat" class="pricing-section">
+        <h2 class="section-title">Size Uygun <span>Paketi Seçin</span></h2>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="plan-name">Başlangıç</div>
+                <div class="price">1.000₺<span>/ay</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Tüm Özelliklere Erişim</li>
+                    <li><i class="fas fa-check"></i> 7/24 Teknik Destek</li>
+                    <li><i class="fas fa-check"></i> Sınırsız Sekme</li>
+                </ul>
+                <a href="https://t.me/yzcemir" target="_blank" class="btn-price">Satın Al</a>
+            </div>
+
+            <div class="price-card">
+                <div class="plan-name">Profesyonel</div>
+                <div class="price">2.500₺<span>/3 ay</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> <b>500₺ Tasarruf Edin</b></li>
+                    <li><i class="fas fa-check"></i> Öncelikli Destek</li>
+                    <li><i class="fas fa-check"></i> Erken Güncelleme Erişimi</li>
+                </ul>
+                <a href="https://t.me/yzcemir" target="_blank" class="btn-price">Satın Al</a>
+            </div>
+
+            <div class="price-card popular">
+                <div class="badge">EN AVANTAJLI</div>
+                <div class="plan-name">Uzman</div>
+                <div class="price">9.000₺<span>/yıl</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> <b>3.000₺ Tasarruf Edin</b></li>
+                    <li><i class="fas fa-check"></i> VIP Destek Hattı</li>
+                    <li><i class="fas fa-check"></i> Özel İstek Geliştirme</li>
+                </ul>
+                <a href="https://t.me/yzcemir" target="_blank" class="btn-price">Satın Al</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>
+            &copy; 2026 EveryKod+. Tüm hakları saklıdır. | Developed By 
+            <a href="https://t.me/yzcemir" target="_blank" class="developer-link">EmirY</a>
+        </p>
+    </footer>
+
+</body>
+</html>
