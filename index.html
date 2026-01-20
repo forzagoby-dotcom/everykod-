@@ -55,12 +55,13 @@
             align-items: center;
             padding: 20px 5%;
             backdrop-filter: blur(10px);
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.9);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border);
+            transition: 0.3s;
         }
 
         .logo {
@@ -115,6 +116,9 @@
             font-weight: 700;
             font-size: 16px;
             transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
         .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
 
@@ -239,7 +243,7 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Min genişlik ayarlandı */
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -304,7 +308,6 @@
             font-size: 14px;
         }
         
-        /* EmirY Link Stili */
         .developer-link {
             color: var(--accent);
             text-decoration: none;
@@ -312,6 +315,65 @@
             transition: 0.3s;
         }
         .developer-link:hover { color: var(--primary); text-decoration: underline; }
+
+        /* =================================================================
+           MOBİL UYUMLULUK (MEDIA QUERIES)
+           ================================================================= */
+        @media (max-width: 768px) {
+            
+            /* Menü: Dikey Hizalama */
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .nav-links {
+                gap: 15px;
+                font-size: 13px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            /* Hero Bölümü */
+            header {
+                padding: 120px 20px 50px; /* Üst boşluk azaltıldı */
+            }
+            h1 {
+                font-size: 36px; /* Yazı küçültüldü */
+                margin-bottom: 15px;
+            }
+            .hero-desc {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+            .btn-primary {
+                width: 100%; /* Buton mobilde tam genişlik */
+                justify-content: center;
+            }
+
+            /* Bölümler Genel */
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            /* Özellikler ve Fiyatlandırma */
+            .features, .pricing-grid, .steps-container {
+                padding: 30px 20px;
+                gap: 20px;
+            }
+
+            /* Fiyat Kartları */
+            .price-card {
+                padding: 30px 20px;
+            }
+            .price { font-size: 40px; }
+            
+            /* Popüler kart efekti mobilde taşmasın diye normalleştir */
+            .price-card.popular {
+                transform: scale(1);
+            }
+        }
 
     </style>
 </head>
@@ -329,7 +391,7 @@
             <a href="#nasil">Nasıl Çalışır?</a>
             <a href="#fiyat">Paketler</a>
         </div>
-        </nav>
+    </nav>
 
     <header>
         <h1>Dijital Dünyanızı <br> Tek Merkezden Yönetin</h1>
